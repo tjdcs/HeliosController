@@ -1,4 +1,4 @@
-from helios_controller import HeliosController
+from helios_controller import HeliosController, CommonPaths, PatternTypes
 
 
 def main():
@@ -6,7 +6,7 @@ def main():
     hc.patch("dev.display.brightness", 50)
     hc.patch("dev.display.blackout", False)
 
-    hc.patch(hc.Paths.TEST_PATTERN_TYPE, hc.PatternTypes.RED)
+    hc.patch(CommonPaths.TEST_PATTERN_TYPE, PatternTypes.RED)
     pass
 
 

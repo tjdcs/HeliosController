@@ -6,6 +6,35 @@ import json
 from .utilities import path_value_to_dict
 
 
+class PatternTypes(str, Enum):
+    """Common processor based test patterns
+
+    This enum can be used to use python symbolic values to set specific
+    control strings on the test pattern property of the Helios API
+    """
+
+    CUSTOM = "customColor"
+    WHITE = "white"
+    RED = "red"
+    GREEN = "green"
+    BLUE = "blue"
+
+
+class CommonPaths(str, Enum):
+    """A `str` Enum for some common property paths. Makes it easier to access
+    common properties with the `get` and `patch` functions.
+    """
+
+    BRIGHTNESS = "dev.display.brightness"
+    BLACKOUT = "dev.display.blackout"
+    FREEZE = "dev.display.freeze"
+    CCT = "dev.display.cct"
+    TILES_INFO_STRING = "dev.display.tilesInfo"
+    TEST_PATTERN_BASE_PATH = "dev.ingest.testPattern"
+    TEST_PATTERN_TYPE = TEST_PATTERN_BASE_PATH + ".type"
+    TEST_PATTERN_CUSTOM_COLOR_VALUE = TEST_PATTERN_BASE_PATH + ".color"
+
+
 class HeliosController:
     """Helios LED Wall Processor Python Controller
 
@@ -14,33 +43,6 @@ class HeliosController:
     `get` function with no arguments. Sub-properties can be accessed by using a
     dot delimited object path.
     """
-
-    class PatternTypes(str, Enum):
-        """Common processor based test patterns
-
-        This enum can be used to use python symbolic values to set specific
-        control strings on the test pattern property of the Helios API
-        """
-
-        CUSTOM = "customColor"
-        WHITE = "white"
-        RED = "red"
-        GREEN = "green"
-        BLUE = "blue"
-
-    class Paths(str, Enum):
-        """A `str` Enum for some common property paths. Makes it easier to access
-        common properties with the `get` and `patch` functions.
-        """
-
-        BRIGHTNESS = "dev.display.brightness"
-        BLACKOUT = "dev.display.blackout"
-        FREEZE = "dev.display.freeze"
-        CCT = "dev.display.cct"
-        TILES_INFO_STRING = "dev.display.tilesInfo"
-        TEST_PATTERN_BASE_PATH = "dev.ingest.testPattern"
-        TEST_PATTERN_TYPE = TEST_PATTERN_BASE_PATH + ".type"
-        TEST_PATTERN_CUSTOM_COLOR_VALUE = TEST_PATTERN_BASE_PATH + ".color"
 
     def __init__(self, ip: str) -> None:
         """Construct a new HeliosController python interface.
@@ -85,7 +87,7 @@ class HeliosController:
 
         return data
 
-    def patch(self, path: str | Paths, value: Any):
+    def patch(self, path: str | CommonPaths, value: Any):
         """Use HTTP PATCH to set / change a settable value on the Helios JSON
         API.
 

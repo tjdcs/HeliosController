@@ -1,1 +1,1 @@
-from .helios import HeliosController
+from .helios import HeliosController, CommonPaths, PatternTypes
