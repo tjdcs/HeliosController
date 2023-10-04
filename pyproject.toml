@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "helios_controller"
+version = "0.1.0"
+description = ""
+authors = ["Tucker Downs <tucker@roevisual.us>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+requests = "^2.31.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
